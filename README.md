@@ -1,160 +1,58 @@
-Sistem Antrian Modern (Pusher Ready)
-Selamat datang di Sistem Antrian Modern. Aplikasi ini dibangun menggunakan Laravel dan Bootstrap, serta memanfaatkan Pusher (WebSockets) untuk menyajikan update status antrian secara real-time ke Papan Monitor.
+Baik, saya mengerti. Anda ingin file README.md yang sudah saya buat, dikirim ulang dengan format yang terstruktur dan rapi.
 
-Fitur Utama
-Otorisasi Berbasis Peran (RBAC): Admin, Petugas, dan Pengguna Publik.
+Berikut adalah file README.md lengkap dalam format Markdown, yang teratur dan siap untuk Anda tempelkan ke repositori GitHub.
 
-Real-Time Monitoring: Menggunakan Pusher untuk broadcasting status antrian secara instan ke Papan Monitor.
+Sistem Antrian Digital
+Aplikasi ini adalah Sistem Antrian Digital berbasis web yang mendukung real-time monitoring dan otorisasi berbasis peran (RBAC) untuk manajemen layanan yang efisien.
 
-Manajemen Loket: Admin dapat membuat/mengedit Loket dan mengubah status operasional (Aktif, Istirahat, Tutup).
+🚀 Fitur Utama
+Papan Monitor Real-Time: Menampilkan nomor antrian yang sedang dilayani secara instan di layar publik.
 
-Alur Kerja Petugas: Petugas ditugaskan ke Loket spesifik dan memiliki tombol aksi Panggil dan Selesaikan antrian.
+Otorisasi Pengguna: Memisahkan akses untuk Admin, Petugas, dan Pengunjung Publik.
 
-Pelaporan Kinerja: Merekam waktu layanan (finished_at) untuk analisis kinerja.
+Manajemen Loket: Admin dapat membuat, mengelola, dan menetapkan status operasional Loket (Aktif, Istirahat, Tutup).
 
-🚀 Instalasi dan Deployment
-Ikuti langkah-langkah di bawah ini untuk menjalankan proyek secara lokal.
+Alur Kerja Pelayanan: Petugas memiliki kontrol penuh untuk Memanggil dan Menyelesaikan layanan antrian.
 
-1. Kloning Repositori & Instal Dependensi
-# Kloning repositori Anda
-git clone [https://github.com/YourUsername/antrian-online-final.git](https://github.com/YourUsername/antrian-online-final.git)
-cd antrian-online-final
+Pelaporan Kinerja: Mencatat data waktu layanan (finished_at) untuk analisis performa loket.
 
-# Instal dependensi PHP
-composer install
+🛠️ Panduan Penggunaan Singkat
+1. Pengunjung (Publik)
+Akses halaman utama (/).
 
-# Instal dependensi Node.js (untuk front-end dan Pusher)
-npm install
+Pilih Loket yang Aktif pada formulir.
 
-2. Konfigurasi Lingkungan (.env)
-Buat file .env dari contoh yang tersedia:
+Klik Dapatkan Antrian.
 
-cp .env.example .env
-php artisan key:generate
+Status antrian Anda akan tercatat, dan Anda dapat memantau urutan Anda di halaman utama.
 
-Edit file .env dan sesuaikan konfigurasi Database (DB_...) dan Pusher.
+2. Petugas (Layanan)
+Login menggunakan akun Petugas yang sudah terdaftar.
 
-Variabel
+Akses Layanan Petugas (/petugas/monitor).
 
-Nilai Wajib
+Gunakan tombol Panggil Antrian Berikutnya (<i class="fas fa-bullhorn"></i>) untuk memanggil antrian terdepan.
 
-APP_DEBUG
+Setelah layanan selesai, gunakan tombol Selesaikan Layanan (<i class="fas fa-check"></i>).
 
-true (untuk pengembangan)
+3. Admin (Manajemen)
+Login menggunakan akun Admin.
 
-DB_DATABASE
+Akses Admin Panel untuk:
 
-nama_database_anda
+Mengelola akun pengguna (menetapkan peran Petugas).
 
-BROADCAST_DRIVER
+Mengelola Loket (membuat Loket baru dan mengubah status).
 
-pusher
+Melihat Laporan Kinerja harian.
 
-PUSHER_APP_ID
+📝 Instalasi (Teknis)
+Proyek ini dibangun menggunakan Laravel. Pastikan Anda telah menginstal PHP, MySQL, Composer, dan Node.js.
 
-2056143
+Jalankan composer install dan npm install.
 
-PUSHER_APP_KEY
+Konfigurasi database di file .env.
 
-e0403c230bac51cce49a
+Jalankan migrasi dan seeder: php artisan migrate:fresh --seed.
 
-PUSHER_APP_SECRET
-
-76d67ac56fbddd4c569d
-
-PUSHER_APP_CLUSTER
-
-ap1
-
-3. Database dan Seeding
-Jalankan perintah ini untuk membuat ulang database, migrasi tabel (loket_id, finished_at), dan mengisi akun Admin/Petugas pertama.
-
-# Hapus database lama, migrasi ulang, dan jalankan seeder
-php artisan migrate:fresh --seed
-php artisan db:seed --class=AdminUserSeeder
-
-4. Kompilasi dan Jalankan Server
-Kompilasi aset front-end dan jalankan server.
-
-# Kompilasi aset (CSS dan JS)
-npm run dev
-
-# Jalankan Server Laravel
-php artisan serve
-
-🛠️ Panduan Penggunaan
-Aplikasi ini memiliki tiga alur pengguna utama:
-
-1. Akun Default (Setelah Seeding)
-Peran
-
-Email
-
-Password
-
-Akses
-
-Admin
-
-admin@antrian.com
-
-password
-
-/dashboard
-
-Petugas
-
-petugas@antrian.com
-
-password
-
-/petugas/monitor
-
-2. Alur Pengunjung (Publik)
-Akses publik, tidak perlu login.
-
-Tujuan
-
-Route
-
-Deskripsi
-
-Ambil Antrian
-
-/
-
-Pengunjung memilih loket yang Aktif dan mendapatkan nomor antrian (contoh: L-001).
-
-Monitor Publik
-
-/monitor
-
-Layar besar (monitor ruang tunggu) yang update real-time setiap kali ada pemanggilan baru.
-
-3. Alur Petugas (Layanan)
-Petugas harus login dan ditugaskan ke Loket tertentu oleh Admin.
-
-Akses Panel: Setelah login, Petugas diarahkan ke /dashboard lalu klik Layanan Petugas.
-
-Aksi Panggil: Di panel layanan, klik tombol Panggil Antrian Berikutnya (<i class="fas fa-bullhorn"></i>). Aksi ini akan:
-
-Mengubah status antrian menjadi dipanggil.
-
-Mengirim Event Pusher untuk meng-update Papan Monitor secara instan.
-
-Aksi Selesaikan: Setelah layanan selesai, Petugas mengklik tombol Selesaikan Layanan (<i class="fas fa-check"></i>). Aksi ini akan:
-
-Mengubah status antrian menjadi selesai.
-
-Mencatat waktu selesai (finished_at) untuk keperluan laporan.
-
-⚙️ Memastikan Pusher Berjalan
-Untuk memastikan koneksi real-time berfungsi:
-
-Pastikan Server Berjalan: php artisan serve
-
-Pastikan Queue Worker Berjalan: Worker ini memproses event Pusher. Buka terminal baru dan jalankan:
-
-php artisan queue:work --verbose
-
-(Jika Anda melihat event diproses setelah mengklik tombol Panggil, Pusher Anda sudah bekerja!)
+Jalankan server: php artisan serve.
